@@ -50,7 +50,26 @@ Aparte de *Angular 2* y *Asp.Net WebApi* en el proyecto se utilizan librerías:
 
 ### Prerequisitos
 
-> **TODO:** colocar la lista de programas necesarios para compilar y ejecutar.
+* [Git][Git] v2.8
+* [Visual Studio 2015 Community][VS2015]: para desarrollo del back-end.
+  * [GitHub extension][VSGH], recomendada.
+* [Visual Studio Code][VSCode]: para desarrollo del front-end.
+  * [Editor Config][EditorConfig] plugin.
+* [Node Js][NodeJs] v6.3.1
+
+> En el caso de **git** y **node** se asume que están en el `PATH` para poder
+> ejecutar los comandos sin problemas desde el cmd o powershell desde cualquier
+> directorio. Para verificar podes ejecutar los siguientes comandos en el cmd:
+>
+> Verificar si git está instalado:
+> ```sh
+> git --version
+> ```
+>
+> Verificar si node está instalado:
+> ```sh
+> node --version
+> ```
 
 ### Clonar
 
@@ -93,3 +112,9 @@ colocando todos los ejecutables en la carpeta `bin`.
 [Dapper]: https://github.com/StackExchange/dapper-dot-net
 [EF]: https://www.asp.net/entity-framework
 [Exceptionless]: https://github.com/exceptionless/Exceptionless
+[VS2015]: https://www.visualstudio.com/vs/community/
+[VSCode]: https://code.visualstudio.com/
+[EditorConfig]: https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig
+[NodeJs]: https://nodejs.org
+[Git]: https://git-scm.com/
+[VSGH]: https://visualstudio.github.com/
