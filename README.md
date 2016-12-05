@@ -50,10 +50,13 @@ Aparte de *Angular 2* y *Asp.Net WebApi* en el proyecto se utilizan librerías:
 
 ### Prerequisitos
 
+> **TODO:** colocar la lista de programas necesarios para compilar y ejecutar.
 
 ### Clonar
 
-> **TODO:** Colocar instrucciones para clonar el repositorio
+```sh
+git clone https://github.com/miguelerm/baak.git
+```
 
 ### Compilar
 
