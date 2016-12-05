@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>Renovando Token...</title>
+
+    <base href="/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+
+<body>
+    <h1>Renovando Token...</h1>
+
+    <pre>
+        <code id="output">
+        </code>
+    </pre>
+
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+    <script src="libs/jsrsasign-latest-all-min.js"></script>
+    <script src="systemjs.silent-renew.config.js"></script>
+    <script>
+        System.import('silent-renew').catch(function(err){ console.error(err); });
+    </script>
+
+</body>
+
+</html>
