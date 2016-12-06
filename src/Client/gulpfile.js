@@ -5,6 +5,7 @@ var typescript = require('gulp-typescript');
 var systemjsBuilder = require('systemjs-builder');
 var uglify = require('gulp-uglify');
 var config = require('./app/config.json');
+var del = require('del');
 
 const outputPath = "../../bin/Client";
 
@@ -23,7 +24,7 @@ gulp.task('compile:ts', function () {
 });
 
 gulp.task('copy:config', ['compile:ts'], function () {
-  config.environment = "prod";
+  config.ambiente = "prod";
   require('fs').writeFileSync(outputPath + '/app/config.json', JSON.stringify(config));
 });
 
@@ -75,7 +76,7 @@ gulp.task('copy:vendor', function () {
 });
 
 gulp.task('vendor', ['bundle:vendor']);
-gulp.task('app', ['compile:ts', 'bundle:app']);
+gulp.task('app', ['bundle:app', 'bundle:signin', 'bundle:silent-renew']);
 
 // Bundle dependencies and app into one file (app.bundle.js)
 gulp.task('bundle', ['vendor', 'app'], function () {
@@ -83,9 +84,39 @@ gulp.task('bundle', ['vendor', 'app'], function () {
         outputPath + '/vendor/vendors.js',
         outputPath + '/app/app-bundle.js'
         ])
-    .pipe(concat('all.bundle.js'))
+    .pipe(concat('app.bundle.js'))
     .pipe(uglify())
+    .pipe(gulp.dest(outputPath + '/js'));
+});
+
+gulp.task('uglify-scripts', ['bundle'], function () {
+  return gulp
+      .src([
+        outputPath + '/app/signin-bundle.js',
+        outputPath + '/app/silent-renew-bundle.js',
+        './libs/jsrsasign-latest-all-min.js'
+      ])
+      .pipe(uglify())
+      .pipe(gulp.dest(outputPath + '/js'));
+});
+
+gulp.task('copy-static-files', ['uglify-scripts'], function() {
+
+  return gulp
+    .src([
+      './*.html',
+      './favicon.ico',
+      './*.css'
+    ])
     .pipe(gulp.dest(outputPath));
 });
 
-gulp.task('default', ['bundle']);
+gulp.task('clean-bundle-temp', ['copy-static-files'], function() {
+  return del([
+    outputPath + '/node_modules/**',
+    outputPath + '/app/**',
+    outputPath + '/vendor/**'
+  ], {force: true})
+});
+
+gulp.task('default', ['copy-static-files', 'clean-bundle-temp']);

@@ -11,8 +11,10 @@ namespace Baak.Hosts.Desarrollo.AngularWebServer
     {
         public void Configuration(IAppBuilder app)
         {
-            string dir = AppDomain.CurrentDomain.RelativeSearchPath;
+            string dir = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            Console.WriteLine("Dir: {0}", dir);
             string contentPath = Path.GetFullPath(Path.Combine(dir, @"../../Client"));
+            Console.WriteLine("Content Path: {0}", contentPath);
 
             app.UseFileServer(new FileServerOptions
             {

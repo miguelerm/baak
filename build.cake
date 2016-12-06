@@ -64,6 +64,13 @@ Task("Run-Server-Unit-Tests")
         });
     });
 
+Task("Copy-Server-Artifacts")
+    .IsDependentOn("Build-Server")
+    .Does(() => {
+        var srcBinDir = Directory("./src/Server/HostDesarrollo/bin") + Directory(configuration);
+        CopyDirectory(srcBinDir, buildDir);
+    });
+
 Task("Restore-Npm-Packages")
     .Does(() => {
 
@@ -91,6 +98,7 @@ Task("Run-Client-Unit-Tests")
 
 Task("Default")
     .IsDependentOn("Run-Server-Unit-Tests")
+    .IsDependentOn("Copy-Server-Artifacts")
     .IsDependentOn("Run-Client-Unit-Tests");
 
 //////////////////////////////////////////////////////////////////////

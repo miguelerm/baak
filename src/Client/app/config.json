@@ -1,5 +1,5 @@
 {
-  "environment": "dev",
+  "ambiente": "dev",
   "apiUrl": "http://localhost:50000",
   "autenticacion": {
     "issuer": "http://localhost:50001",
