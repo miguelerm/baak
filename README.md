@@ -14,7 +14,7 @@ misma definición de este último).
 ## Problemas que Baak trata de resolver
 
 Antes que nada cabe mencionar, que todo lo implementado en este proyecto es
-puramente una opinion personal y no pretende ser una ley o afirmación que
+puramente una opinión personal y no pretende ser una ley o afirmación que
 establece que esta sea la única (o la mejor) forma de hacer las cosas,
 simplemente es la forma (y las herramientas) que me ha funcionado en el
 transcurso de mi carrera. Habiendo aclarado esto, continuemos.
@@ -46,9 +46,9 @@ Aparte de *Angular 2* y *Asp.Net WebApi* en el proyecto se utilizan librerías:
 > usuarios y [OAuth 2.0][OAuth2] para otorgar acceso a las [APIs REST][Conceptos-REST]
 > de los diferentes servicios.
 
-## Como iniciar
+## Cómo iniciar
 
-### Prerequisitos
+### Requisitos
 
 * [Git][Git] v2.8
 * [Visual Studio 2015 Community][VS2015]: para desarrollo del back-end.
@@ -87,7 +87,7 @@ repositorio):
 .\build.ps1
 ```
 
-Esto compilará la solución de Visual Studio y tambien el proyecto de Angular 2
+Esto compilará la solución de Visual Studio y también el proyecto de Angular 2
 colocando todos los ejecutables en la carpeta `bin`.
 
 ### Ejecutar
