@@ -80,8 +80,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AngularWebServer\Startup.cs" />
+    <Compile Include="Configuracion.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="GestorServicios.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -91,6 +93,10 @@
     <ProjectReference Include="..\Autenticacion\Autenticacion.csproj">
       <Project>{f3eaabaf-3136-4b96-912f-eefda090244a}</Project>
       <Name>Autenticacion</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{e9b496b9-42ed-4e4b-a37b-59ccd71a2fe2}</Project>
+      <Name>Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Seguridad\Seguridad.csproj">
       <Project>{7b61fa16-34db-49f1-802e-7e5bf2acc0d4}</Project>

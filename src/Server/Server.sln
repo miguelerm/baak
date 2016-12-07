@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seguridad.Tests", "Seguridad.Tests\Seguridad.Tests.csproj", "{C2491AAB-CF18-4554-8B27-E1623271EB2D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hosts", "Hosts", "{7282000C-E6F3-4CCC-8DB7-D3BB7D8A6BF2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{2A62EF0D-9956-4363-8C0B-A262C86A8582}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +46,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D7B0E188-14FE-4C08-B645-FED502C78719} = {7282000C-E6F3-4CCC-8DB7-D3BB7D8A6BF2}
+		{C2491AAB-CF18-4554-8B27-E1623271EB2D} = {2A62EF0D-9956-4363-8C0B-A262C86A8582}
 	EndGlobalSection
 EndGlobal

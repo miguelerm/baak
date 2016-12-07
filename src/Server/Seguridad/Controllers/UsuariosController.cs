@@ -10,12 +10,7 @@ namespace Baak.Seguridad.Controllers
 
         public IHttpActionResult Get()
         {
-            log.Trace("0 Consultando usuarios...");
-            log.Debug("1 Consultando usuarios...");
-            log.Info("2 Consultando usuarios...");
-            log.Warn("3 Consultando usuarios...");
-            log.Error("4 Consultando usuarios...");
-            log.Fatal("5 Consultando usuarios...");
+            log.Debug("Consultando usuarios...");
 
             return Ok(new UsuarioResumenPagina
             {

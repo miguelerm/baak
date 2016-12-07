@@ -1,7 +1,5 @@
-﻿using Microsoft.Owin.Hosting;
-using Serilog;
+﻿using Serilog;
 using System;
-using System.Collections.Generic;
 
 namespace Baak.Hosts.Desarrollo
 {
@@ -9,58 +7,60 @@ namespace Baak.Hosts.Desarrollo
     {
         private static void Main(string[] args)
         {
+            ConfigurarLogging();
+
+            var configuracion = new Configuracion(args);
+
+            using (var servicios = new GestorServicios())
+            {
+                Console.WriteLine("Iniciando servicios...");
+                IniciarServicios(configuracion, servicios);
+                Console.WriteLine("Servicios Iniciados.");
+
+                Console.WriteLine("Presione Ctrl+C para detener los servicios correctamente.");
+
+                EsperarPorCtrlC();
+
+                Console.WriteLine("Deteniendo servicios...");
+            }
+
+            Console.WriteLine("Servicios detenidos.");
+        }
+
+        private static void ConfigurarLogging()
+        {
             Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Debug()
-                .WriteTo
-                .LiterateConsole(outputTemplate: "{Timestamp:HH:mm} [{Level}] ({SourceContext:l}){NewLine} {Message}{NewLine}{Exception}")
-                .CreateLogger();
+                            .MinimumLevel.Debug()
+                            .WriteTo
+                            .LiterateConsole(outputTemplate: "{Timestamp:HH:mm} [{Level}] ({SourceContext:l}){NewLine} {Message}{NewLine}{Exception}")
+                            .CreateLogger();
+        }
 
-            var argumentos = new Argumentos(args);
+        private static void IniciarServicios(Configuracion configuracion, GestorServicios servicios)
+        {
 
-            using (var servicios = new ServiciosManager(argumentos))
+            servicios.Iniciar<Autenticacion.Startup>("http://localhost:50001");
+            servicios.Iniciar<Seguridad.Startup>("http://localhost:50002");
+
+            if (configuracion.ServeAngularApp)
             {
-                Console.WriteLine("Servicios Iniciados");
-                Console.ReadLine();
+                servicios.Iniciar<AngularWebServer.Startup>("http://localhost:40000");
             }
         }
 
-        private class ServiciosManager : IDisposable
+        private static void EsperarPorCtrlC()
         {
-            private readonly List<IDisposable> servicios;
-
-            public ServiciosManager(Argumentos args)
+            Console.TreatControlCAsInput = true;
+            while (true)
             {
-                servicios = new List<IDisposable> {
-                    WebApp.Start<Autenticacion.Startup>("http://localhost:50001"),
-                    WebApp.Start<Seguridad.Startup>("http://localhost:50002")
-                };
-
-                if (args.ServeAngularApp)
+                var tecla = Console.ReadKey(true);
+                if ((tecla.Modifiers & ConsoleModifiers.Control) != 0 && tecla.Key == ConsoleKey.C)
                 {
-                    servicios.Add(WebApp.Start<AngularWebServer.Startup>("http://localhost:40000"));
-                }
-            }
-
-            public void Dispose()
-            {
-                servicios.ForEach(x => x.Dispose());
-            }
-        }
-
-        public class Argumentos
-        {
-            public bool ServeAngularApp { get; set; }
-
-            public Argumentos(string[] args)
-            {
-                foreach (var arg in args)
-                {
-                    if (arg == "--serve-angular-app")
-                    {
-                        ServeAngularApp = true;
-                    }
+                    break;
                 }
             }
         }
+               
+        
     }
 }
