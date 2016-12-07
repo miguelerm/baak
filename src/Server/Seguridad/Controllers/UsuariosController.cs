@@ -1,4 +1,4 @@
-﻿using Baak.Logging;
+﻿using Baak.Seguridad.Logging;
 using Baak.Seguridad.Modelos;
 using System.Web.Http;
 
@@ -14,10 +14,11 @@ namespace Baak.Seguridad.Controllers
 
             return Ok(new UsuarioResumenPagina
             {
-                Items = new[] { new UsuarioResumen { Id = 1, Nombre = "Demo" } },
+                Elementos = new[] { new UsuarioResumen { Id = 1, Nombre = "Demo" } },
                 PaginaActual = 1,
-                ElementosPagina = 100,
-                Paginas = 1
+                ElementosPorPagina = 100,
+                Paginas = 1,
+                Total = 1
             });
         }
     }

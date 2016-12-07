@@ -28,8 +28,8 @@ export class UsuariosServicio {
 }
 
 export interface UsuariosResumen {
-    elementosPagina: number,
-    items: Array<{}>,
+    elementosPorPagina: number,
+    elementos: Array<{}>,
     paginaActual: number,
     paginas: number
 }

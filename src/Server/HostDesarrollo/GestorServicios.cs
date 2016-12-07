@@ -1,4 +1,4 @@
-﻿using Baak.Logging;
+﻿using Baak.Hosts.Desarrollo.Logging;
 using Microsoft.Owin.Hosting;
 using System;
 using System.Collections.Generic;
@@ -20,12 +20,12 @@ namespace Baak.Hosts.Desarrollo
         public void Iniciar<T>(string url)
         {
             var nombre = ObtenerNombreServicio<T>();
-            log.InfoFormat("Iniciando servicio {servicio}...", nombre);
+            log.InfoFormat("Iniciando servicio {Servicio}...", nombre);
             
             var servicio = WebApp.Start<T>(url);
             servicios.Add(servicio);
 
-            log.InfoFormat("Servicio {servicio} iniciado en {url}", nombre, url);
+            log.InfoFormat("Servicio {Servicio} iniciado en {Url}", nombre, url);
         }
 
         public void Dispose()

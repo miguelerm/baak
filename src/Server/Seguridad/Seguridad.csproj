@@ -102,6 +102,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Packages\LibLog.4.2\LibLog.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Modelos\UsuarioResumen.cs" />
     <Compile Include="Modelos\UsuarioResumenPagina.cs" />
@@ -114,7 +115,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj">
-      <Project>{e9b496b9-42ed-4e4b-a37b-59ccd71a2fe2}</Project>
+      <Project>{E9B496B9-42ED-4E4B-A37B-59CCD71A2FE2}</Project>
       <Name>Core</Name>
     </ProjectReference>
   </ItemGroup>

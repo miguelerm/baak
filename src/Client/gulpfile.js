@@ -6,6 +6,8 @@ var systemjsBuilder = require('systemjs-builder');
 var uglify = require('gulp-uglify');
 var config = require('./app/config.json');
 var del = require('del');
+var less = require('gulp-less');
+var sourcemaps = require('gulp-sourcemaps');
 
 const outputPath = "../../bin/Client";
 
@@ -117,6 +119,19 @@ gulp.task('clean-bundle-temp', ['copy-static-files'], function() {
     outputPath + '/app/**',
     outputPath + '/vendor/**'
   ], {force: true})
+});
+
+gulp.task('build:css', function () {
+  return gulp.src('./styles/main.less')
+  .pipe(sourcemaps.init())
+  .pipe(less({
+    paths: [ './node_modules/bootstrap-less' ]}))
+  .pipe(sourcemaps.write())
+  .pipe(gulp.dest('./styles'));
+});
+
+gulp.task('watch:less', function() {
+  gulp.watch(['./styles/**/*.less'], ['build:css'])
 });
 
 gulp.task('default', ['copy-static-files', 'clean-bundle-temp']);

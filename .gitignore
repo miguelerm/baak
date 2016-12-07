@@ -254,3 +254,4 @@ src/Client/e2e/**/*.js
 src/Client/**/*.js.map
 src/Client/_test-output
 src/Client/_temp
+src/Client/styles/*.css

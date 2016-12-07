@@ -1,9 +1,9 @@
-﻿//===============================================================================
+//===============================================================================
 // LibLog
 //
 // https://github.com/damianh/LibLog
 //===============================================================================
-// Copyright © 2011-2015 Damian Hickey.  All rights reserved.
+// Copyright Â© 2011-2015 Damian Hickey.  All rights reserved.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -32,7 +32,7 @@
 // this can have unintended consequences of consumers of your library using your library to resolve a logger. If the
 // reason is because you want to open this functionality to other projects within your solution,
 // consider [InternalsVisibleTo] instead.
-//
+// 
 // Define LIBLOG_PROVIDERS_ONLY if your library provides its own logging API and you just want to use the
 // LibLog providers internally to provide built in support for popular logging frameworks.
 
@@ -40,46 +40,35 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("Microsoft.Design", "CA1020:AvoidNamespacesWithFewTypes", Scope = "namespace", Target = "Baak.Logging")]
-[assembly: SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Scope = "member", Target = "Baak.Logging.Logger.#Invoke(Baak.Logging.LogLevel,System.Func`1<System.String>,System.Exception,System.Object[])")]
+[assembly: SuppressMessage("Microsoft.Design", "CA1020:AvoidNamespacesWithFewTypes", Scope = "namespace", Target = "Baak.Seguridad.Logging")]
+[assembly: SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Scope = "member", Target = "Baak.Seguridad.Logging.Logger.#Invoke(Baak.Seguridad.Logging.LogLevel,System.Func`1<System.String>,System.Exception,System.Object[])")]
 
-// If you copied this file manually, you need to change all "Baak" so not to clash with other libraries
+// If you copied this file manually, you need to change all "YourRootNameSpace" so not to clash with other libraries
 // that use LibLog
 #if LIBLOG_PROVIDERS_ONLY
-namespace Baak.LibLog
+namespace Baak.Seguridad.LibLog
 #else
-
-namespace Baak.Logging
+namespace Baak.Seguridad.Logging
 #endif
 {
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
-
 #if LIBLOG_PROVIDERS_ONLY
-    using Baak.LibLog.LogProviders;
+    using Baak.Seguridad.LibLog.LogProviders;
 #else
-
-    using Baak.Logging.LogProviders;
-
+    using Baak.Seguridad.Logging.LogProviders;
 #endif
-
     using System;
-
 #if !LIBLOG_PROVIDERS_ONLY
-
     using System.Diagnostics;
-
 #if !LIBLOG_PORTABLE
-
     using System.Runtime.CompilerServices;
-
 #endif
 #endif
 
 #if LIBLOG_PROVIDERS_ONLY
     internal
 #else
-
     public
 #endif
     delegate bool Logger(LogLevel logLevel, Func<string> messageFunc, Exception exception = null, params object[] formatParameters);
@@ -89,7 +78,6 @@ namespace Baak.Logging
     /// Simple interface that represent a logger.
     /// </summary>
 #if LIBLOG_PUBLIC
-
     public
 #else
     internal
@@ -107,12 +95,11 @@ namespace Baak.Logging
         /// <remarks>
         /// Note to implementers: the message func should not be called if the loglevel is not enabled
         /// so as not to incur performance penalties.
-        ///
+        /// 
         /// To check IsEnabled call Log with only LogLevel and check the return value, no event will be written.
         /// </remarks>
-        bool Log(LogLevel logLevel, Func<string> messageFunc, Exception exception = null, params object[] formatParameters);
+        bool Log(LogLevel logLevel, Func<string> messageFunc, Exception exception = null, params object[] formatParameters );
     }
-
 #endif
 
     /// <summary>
@@ -121,7 +108,6 @@ namespace Baak.Logging
 #if LIBLOG_PROVIDERS_ONLY
     internal
 #else
-
     public
 #endif
     enum LogLevel
@@ -135,10 +121,6 @@ namespace Baak.Logging
     }
 
 #if !LIBLOG_PROVIDERS_ONLY
-#if !LIBLOG_PORTABLE
-
-    [ExcludeFromCodeCoverage]
-#endif
 #if LIBLOG_PUBLIC
     public
 #else
@@ -394,7 +376,6 @@ namespace Baak.Logging
             return value;
         }
     }
-
 #endif
 
     /// <summary>
@@ -403,7 +384,6 @@ namespace Baak.Logging
 #if LIBLOG_PROVIDERS_ONLY
     internal
 #else
-
     public
 #endif
     interface ILogProvider
@@ -434,10 +414,6 @@ namespace Baak.Logging
     /// <summary>
     /// Provides a mechanism to create instances of <see cref="ILog" /> objects.
     /// </summary>
-#if !LIBLOG_PORTABLE
-
-    [ExcludeFromCodeCoverage]
-#endif
 #if LIBLOG_PROVIDERS_ONLY
     internal
 #else
@@ -446,10 +422,8 @@ namespace Baak.Logging
     static class LogProvider
     {
 #if !LIBLOG_PROVIDERS_ONLY
-
         private const string NullLogProvider = "Current Log Provider is not set. Call SetCurrentLogProvider " +
                                                "with a non-null value first.";
-
         private static dynamic s_currentLogProvider;
         private static Action<ILogProvider> s_onCurrentLogProviderSet;
 
@@ -479,10 +453,10 @@ namespace Baak.Logging
         public static bool IsDisabled { get; set; }
 
         /// <summary>
-        /// Sets an action that is invoked when a consumer of your library has called SetCurrentLogProvider. It is
+        /// Sets an action that is invoked when a consumer of your library has called SetCurrentLogProvider. It is 
         /// important that hook into this if you are using child libraries (especially ilmerged ones) that are using
         /// LibLog (or other logging abstraction) so you adapt and delegate to them.
-        /// <see cref="SetCurrentLogProvider"/>
+        /// <see cref="SetCurrentLogProvider"/> 
         /// </summary>
         internal static Action<ILogProvider> OnCurrentLogProviderSet
         {
@@ -507,7 +481,6 @@ namespace Baak.Logging
         /// <typeparam name="T">The type whose name will be used for the logger.</typeparam>
         /// <returns>An instance of <see cref="ILog"/></returns>
 #if LIBLOG_PUBLIC
-
         public
 #else
         internal
@@ -518,7 +491,6 @@ namespace Baak.Logging
         }
 
 #if !LIBLOG_PORTABLE
-
         /// <summary>
         /// Gets a logger for the current class.
         /// </summary>
@@ -534,7 +506,6 @@ namespace Baak.Logging
             var stackFrame = new StackFrame(1, false);
             return GetLogger(stackFrame.GetMethod().DeclaringType);
         }
-
 #endif
 
         /// <summary>
@@ -544,7 +515,6 @@ namespace Baak.Logging
         /// <param name="fallbackTypeName">If the type is null then this name will be used as the log name instead</param>
         /// <returns>An instance of <see cref="ILog"/></returns>
 #if LIBLOG_PUBLIC
-
         public
 #else
         internal
@@ -561,7 +531,6 @@ namespace Baak.Logging
         /// <param name="name">The name.</param>
         /// <returns>An instance of <see cref="ILog"/></returns>
 #if LIBLOG_PUBLIC
-
         public
 #else
         internal
@@ -614,43 +583,38 @@ namespace Baak.Logging
                 ? new DisposableAction(() => { })
                 : logProvider.OpenMappedContext(key, value);
         }
-
 #endif
 
 #if LIBLOG_PROVIDERS_ONLY
     private
 #else
-
-        internal
+    internal
 #endif
     delegate bool IsLoggerAvailable();
 
 #if LIBLOG_PROVIDERS_ONLY
     private
 #else
-
-        internal
+    internal
 #endif
     delegate ILogProvider CreateLogProvider();
 
 #if LIBLOG_PROVIDERS_ONLY
     private
 #else
-
-        internal
+    internal
 #endif
     static readonly List<Tuple<IsLoggerAvailable, CreateLogProvider>> LogProviderResolvers =
-                new List<Tuple<IsLoggerAvailable, CreateLogProvider>>
-            {
+            new List<Tuple<IsLoggerAvailable, CreateLogProvider>>
+        {
             new Tuple<IsLoggerAvailable, CreateLogProvider>(SerilogLogProvider.IsLoggerAvailable, () => new SerilogLogProvider()),
             new Tuple<IsLoggerAvailable, CreateLogProvider>(NLogLogProvider.IsLoggerAvailable, () => new NLogLogProvider()),
             new Tuple<IsLoggerAvailable, CreateLogProvider>(Log4NetLogProvider.IsLoggerAvailable, () => new Log4NetLogProvider()),
             new Tuple<IsLoggerAvailable, CreateLogProvider>(EntLibLogProvider.IsLoggerAvailable, () => new EntLibLogProvider()),
             new Tuple<IsLoggerAvailable, CreateLogProvider>(LoupeLogProvider.IsLoggerAvailable, () => new LoupeLogProvider()),
-            };
+        };
 
 #if !LIBLOG_PROVIDERS_ONLY
-
         private static void RaiseOnCurrentLogProviderSet()
         {
             if (s_onCurrentLogProviderSet != null)
@@ -658,7 +622,6 @@ namespace Baak.Logging
                 s_onCurrentLogProviderSet(s_currentLogProvider);
             }
         }
-
 #endif
 
         [SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "System.Console.WriteLine(System.String,System.Object,System.Object)")]
@@ -690,10 +653,6 @@ namespace Baak.Logging
         }
 
 #if !LIBLOG_PROVIDERS_ONLY
-#if !LIBLOG_PORTABLE
-
-        [ExcludeFromCodeCoverage]
-#endif
         internal class NoOpLogger : ILog
         {
             internal static readonly NoOpLogger Instance = new NoOpLogger();
@@ -703,15 +662,10 @@ namespace Baak.Logging
                 return false;
             }
         }
-
 #endif
     }
 
 #if !LIBLOG_PROVIDERS_ONLY
-#if !LIBLOG_PORTABLE
-
-    [ExcludeFromCodeCoverage]
-#endif
     internal class LoggerExecutionWrapper : ILog
     {
         private readonly Logger _logger;
@@ -756,45 +710,33 @@ namespace Baak.Logging
             return _logger(logLevel, wrappedMessageFunc, exception, formatParameters);
         }
     }
-
 #endif
 }
 
 #if LIBLOG_PROVIDERS_ONLY
-namespace Baak.LibLog.LogProviders
+namespace Baak.Seguridad.LibLog.LogProviders
 #else
-
-namespace Baak.Logging.LogProviders
+namespace Baak.Seguridad.Logging.LogProviders
 #endif
 {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
-
 #if !LIBLOG_PORTABLE
-
     using System.Diagnostics;
-
 #endif
-
     using System.Globalization;
     using System.Linq;
     using System.Linq.Expressions;
     using System.Reflection;
-
 #if !LIBLOG_PORTABLE
+    using System.Text;
 #endif
-
     using System.Text.RegularExpressions;
 
-#if !LIBLOG_PORTABLE
-
-    [ExcludeFromCodeCoverage]
-#endif
     internal abstract class LogProviderBase : ILogProvider
     {
         protected delegate IDisposable OpenNdc(string message);
-
         protected delegate IDisposable OpenMdc(string key, string value);
 
         private readonly Lazy<OpenNdc> _lazyOpenNdcMethod;
@@ -832,10 +774,6 @@ namespace Baak.Logging.LogProviders
         }
     }
 
-#if !LIBLOG_PORTABLE
-
-    [ExcludeFromCodeCoverage]
-#endif
     internal class NLogLogProvider : LogProviderBase
     {
         private readonly Func<string, object> _getLoggerByNameDelegate;
@@ -917,10 +855,6 @@ namespace Baak.Logging.LogProviders
             return Expression.Lambda<Func<string, object>>(methodCall, nameParam).Compile();
         }
 
-#if !LIBLOG_PORTABLE
-
-        [ExcludeFromCodeCoverage]
-#endif
         internal class NLogLogger
         {
             private readonly dynamic _logger;
@@ -1025,7 +959,7 @@ namespace Baak.Logging.LogProviders
                     return false;
                 }
 
-                if (exception != null)
+                if(exception != null)
                 {
                     return LogException(logLevel, messageFunc, exception);
                 }
@@ -1038,7 +972,6 @@ namespace Baak.Logging.LogProviders
                             return true;
                         }
                         break;
-
                     case LogLevel.Info:
                         if (_logger.IsInfoEnabled)
                         {
@@ -1046,7 +979,6 @@ namespace Baak.Logging.LogProviders
                             return true;
                         }
                         break;
-
                     case LogLevel.Warn:
                         if (_logger.IsWarnEnabled)
                         {
@@ -1054,7 +986,6 @@ namespace Baak.Logging.LogProviders
                             return true;
                         }
                         break;
-
                     case LogLevel.Error:
                         if (_logger.IsErrorEnabled)
                         {
@@ -1062,7 +993,6 @@ namespace Baak.Logging.LogProviders
                             return true;
                         }
                         break;
-
                     case LogLevel.Fatal:
                         if (_logger.IsFatalEnabled)
                         {
@@ -1070,7 +1000,6 @@ namespace Baak.Logging.LogProviders
                             return true;
                         }
                         break;
-
                     default:
                         if (_logger.IsTraceEnabled)
                         {
@@ -1107,7 +1036,6 @@ namespace Baak.Logging.LogProviders
                             return true;
                         }
                         break;
-
                     case LogLevel.Info:
                         if (_logger.IsInfoEnabled)
                         {
@@ -1115,7 +1043,6 @@ namespace Baak.Logging.LogProviders
                             return true;
                         }
                         break;
-
                     case LogLevel.Warn:
                         if (_logger.IsWarnEnabled)
                         {
@@ -1123,7 +1050,6 @@ namespace Baak.Logging.LogProviders
                             return true;
                         }
                         break;
-
                     case LogLevel.Error:
                         if (_logger.IsErrorEnabled)
                         {
@@ -1131,7 +1057,6 @@ namespace Baak.Logging.LogProviders
                             return true;
                         }
                         break;
-
                     case LogLevel.Fatal:
                         if (_logger.IsFatalEnabled)
                         {
@@ -1139,7 +1064,6 @@ namespace Baak.Logging.LogProviders
                             return true;
                         }
                         break;
-
                     default:
                         if (_logger.IsTraceEnabled)
                         {
@@ -1157,19 +1081,14 @@ namespace Baak.Logging.LogProviders
                 {
                     case LogLevel.Debug:
                         return _logger.IsDebugEnabled;
-
                     case LogLevel.Info:
                         return _logger.IsInfoEnabled;
-
                     case LogLevel.Warn:
                         return _logger.IsWarnEnabled;
-
                     case LogLevel.Error:
                         return _logger.IsErrorEnabled;
-
                     case LogLevel.Fatal:
                         return _logger.IsFatalEnabled;
-
                     default:
                         return _logger.IsTraceEnabled;
                 }
@@ -1181,22 +1100,16 @@ namespace Baak.Logging.LogProviders
                 {
                     case LogLevel.Trace:
                         return _levelTrace;
-
                     case LogLevel.Debug:
                         return _levelDebug;
-
                     case LogLevel.Info:
                         return _levelInfo;
-
                     case LogLevel.Warn:
                         return _levelWarn;
-
                     case LogLevel.Error:
                         return _levelError;
-
                     case LogLevel.Fatal:
                         return _levelFatal;
-
                     default:
                         throw new ArgumentOutOfRangeException("logLevel", logLevel, null);
                 }
@@ -1204,10 +1117,6 @@ namespace Baak.Logging.LogProviders
         }
     }
 
-#if !LIBLOG_PORTABLE
-
-    [ExcludeFromCodeCoverage]
-#endif
     internal class Log4NetLogProvider : LogProviderBase
     {
         private readonly Func<string, object> _getLoggerByNameDelegate;
@@ -1316,10 +1225,6 @@ namespace Baak.Logging.LogProviders
             return Expression.Lambda<Func<string, object>>(methodCall, nameParam).Compile();
         }
 
-#if !LIBLOG_PORTABLE
-
-        [ExcludeFromCodeCoverage]
-#endif
         internal class Log4NetLogger
         {
             private readonly dynamic _logger;
@@ -1572,19 +1477,14 @@ namespace Baak.Logging.LogProviders
                     case LogLevel.Trace:
                     case LogLevel.Debug:
                         return _levelDebug;
-
                     case LogLevel.Info:
                         return _levelInfo;
-
                     case LogLevel.Warn:
                         return _levelWarn;
-
                     case LogLevel.Error:
                         return _levelError;
-
                     case LogLevel.Fatal:
                         return _levelFatal;
-
                     default:
                         throw new ArgumentOutOfRangeException("logLevel", logLevel, null);
                 }
@@ -1592,10 +1492,6 @@ namespace Baak.Logging.LogProviders
         }
     }
 
-#if !LIBLOG_PORTABLE
-
-    [ExcludeFromCodeCoverage]
-#endif
     internal class EntLibLogProvider : LogProviderBase
     {
         private const string TypeTemplate = "Microsoft.Practices.EnterpriseLibrary.Logging.{0}, Microsoft.Practices.EnterpriseLibrary.Logging";
@@ -1702,20 +1598,16 @@ namespace Baak.Logging.LogProviders
                 Expression.Bind(entryType.GetPropertyPortable("Severity"), severityParameter),
                 Expression.Bind(
                     entryType.GetPropertyPortable("TimeStamp"),
-                    Expression.Property(null, typeof(DateTime).GetPropertyPortable("UtcNow"))),
+                    Expression.Property(null, typeof (DateTime).GetPropertyPortable("UtcNow"))),
                 Expression.Bind(
                     entryType.GetPropertyPortable("Categories"),
                     Expression.ListInit(
-                        Expression.New(typeof(List<string>)),
-                        typeof(List<string>).GetMethodPortable("Add", typeof(string)),
+                        Expression.New(typeof (List<string>)),
+                        typeof (List<string>).GetMethodPortable("Add", typeof (string)),
                         logNameParameter)));
             return memberInit;
         }
 
-#if !LIBLOG_PORTABLE
-
-        [ExcludeFromCodeCoverage]
-#endif
         internal class EntLibLogger
         {
             private readonly string _loggerName;
@@ -1736,6 +1628,7 @@ namespace Baak.Logging.LogProviders
                 {
                     return _shouldLog(_loggerName, severity);
                 }
+
 
                 messageFunc = LogMessageFormatter.SimulateStructuredLogging(messageFunc, formatParameters);
                 if (exception != null)
@@ -1760,16 +1653,12 @@ namespace Baak.Logging.LogProviders
                 {
                     case LogLevel.Fatal:
                         return TraceEventTypeValues.Critical;
-
                     case LogLevel.Error:
                         return TraceEventTypeValues.Error;
-
                     case LogLevel.Warn:
                         return TraceEventTypeValues.Warning;
-
                     case LogLevel.Info:
                         return TraceEventTypeValues.Information;
-
                     default:
                         return TraceEventTypeValues.Verbose;
                 }
@@ -1777,10 +1666,6 @@ namespace Baak.Logging.LogProviders
         }
     }
 
-#if !LIBLOG_PORTABLE
-
-    [ExcludeFromCodeCoverage]
-#endif
     internal class SerilogLogProvider : LogProviderBase
     {
         private readonly Func<string, object> _getLoggerByNameDelegate;
@@ -1824,11 +1709,11 @@ namespace Baak.Logging.LogProviders
 
         private static Func<string, string, IDisposable> GetPushProperty()
         {
-            Type ndcContextType = Type.GetType("Serilog.Context.LogContext, Serilog") ??
+            Type ndcContextType = Type.GetType("Serilog.Context.LogContext, Serilog") ?? 
                                   Type.GetType("Serilog.Context.LogContext, Serilog.FullNetFx");
 
             MethodInfo pushPropertyMethod = ndcContextType.GetMethodPortable(
-                "PushProperty",
+                "PushProperty", 
                 typeof(string),
                 typeof(object),
                 typeof(bool));
@@ -1845,7 +1730,7 @@ namespace Baak.Logging.LogProviders
                     valueParam,
                     destructureObjectParam)
                 .Compile();
-
+            
             return (key, value) => pushProperty(key, value, false);
         }
 
@@ -1863,7 +1748,7 @@ namespace Baak.Logging.LogProviders
             ParameterExpression destructureObjectsParam = Expression.Parameter(typeof(bool), "destructureObjects");
             MethodCallExpression methodCall = Expression.Call(null, method, new Expression[]
             {
-                propertyNameParam,
+                propertyNameParam, 
                 valueParam,
                 destructureObjectsParam
             });
@@ -1876,10 +1761,6 @@ namespace Baak.Logging.LogProviders
             return name => func("SourceContext", name, false);
         }
 
-#if !LIBLOG_PORTABLE
-
-        [ExcludeFromCodeCoverage]
-#endif
         internal class SerilogLogger
         {
             private readonly object _logger;
@@ -1938,7 +1819,7 @@ namespace Baak.Logging.LogProviders
                     messageParam,
                     propertyValuesParam);
                 var expression = Expression.Lambda<Action<object, object, string, object[]>>(
-                    writeMethodExp,
+                    writeMethodExp, 
                     instanceParam,
                     levelParam,
                     messageParam,
@@ -1947,7 +1828,7 @@ namespace Baak.Logging.LogProviders
 
                 // Action<object, object, string, Exception> WriteException =
                 // (logger, level, exception, message) => { ((ILogger)logger).Write(level, exception, message, new object[]); }
-                MethodInfo writeExceptionMethodInfo = loggerType.GetMethodPortable("Write",
+                MethodInfo writeExceptionMethodInfo = loggerType.GetMethodPortable("Write", 
                     logEventLevelType,
                     typeof(Exception),
                     typeof(string),
@@ -1961,7 +1842,7 @@ namespace Baak.Logging.LogProviders
                     messageParam,
                     propertyValuesParam);
                 WriteException = Expression.Lambda<Action<object, object, Exception, string, object[]>>(
-                    writeMethodExp,
+                    writeMethodExp, 
                     instanceParam,
                     levelParam,
                     exceptionParam,
@@ -2015,19 +1896,14 @@ namespace Baak.Logging.LogProviders
                 {
                     case LogLevel.Fatal:
                         return FatalLevel;
-
                     case LogLevel.Error:
                         return ErrorLevel;
-
                     case LogLevel.Warn:
                         return WarningLevel;
-
                     case LogLevel.Info:
                         return InformationLevel;
-
                     case LogLevel.Trace:
                         return VerboseLevel;
-
                     default:
                         return DebugLevel;
                 }
@@ -2035,10 +1911,6 @@ namespace Baak.Logging.LogProviders
         }
     }
 
-#if !LIBLOG_PORTABLE
-
-    [ExcludeFromCodeCoverage]
-#endif
     internal class LoupeLogProvider : LogProviderBase
     {
         /// <summary>
@@ -2106,17 +1978,13 @@ namespace Baak.Logging.LogProviders
 
             MethodInfo method = logManagerType.GetMethodPortable(
                 "Write",
-                logMessageSeverityType, typeof(string), typeof(int), typeof(Exception), typeof(bool),
+                logMessageSeverityType, typeof(string), typeof(int), typeof(Exception), typeof(bool), 
                 logWriteModeType, typeof(string), typeof(string), typeof(string), typeof(string), typeof(object[]));
 
             var callDelegate = (WriteDelegate)method.CreateDelegate(typeof(WriteDelegate));
             return callDelegate;
         }
 
-#if !LIBLOG_PORTABLE
-
-        [ExcludeFromCodeCoverage]
-#endif
         internal class LoupeLogger
         {
             private const string LogSystem = "LibLog";
@@ -2158,22 +2026,16 @@ namespace Baak.Logging.LogProviders
                 {
                     case LogLevel.Trace:
                         return TraceEventTypeValues.Verbose;
-
                     case LogLevel.Debug:
                         return TraceEventTypeValues.Verbose;
-
                     case LogLevel.Info:
                         return TraceEventTypeValues.Information;
-
                     case LogLevel.Warn:
                         return TraceEventTypeValues.Warning;
-
                     case LogLevel.Error:
                         return TraceEventTypeValues.Error;
-
                     case LogLevel.Fatal:
                         return TraceEventTypeValues.Critical;
-
                     default:
                         throw new ArgumentOutOfRangeException("logLevel");
                 }
@@ -2181,10 +2043,6 @@ namespace Baak.Logging.LogProviders
         }
     }
 
-#if !LIBLOG_PORTABLE
-
-    [ExcludeFromCodeCoverage]
-#endif
     internal static class TraceEventTypeValues
     {
         internal static readonly Type Type;
@@ -2212,10 +2070,6 @@ namespace Baak.Logging.LogProviders
         }
     }
 
-#if !LIBLOG_PORTABLE
-
-    [ExcludeFromCodeCoverage]
-#endif
     internal static class LogMessageFormatter
     {
         //private static readonly Regex Pattern = new Regex(@"\{@?\w{1,}\}");
@@ -2227,9 +2081,9 @@ namespace Baak.Logging.LogProviders
 
         /// <summary>
         /// Some logging frameworks support structured logging, such as serilog. This will allow you to add names to structured data in a format string:
-        /// For example: Log("Log message to {user}", user). This only works with serilog, but as the user of LibLog, you don't know if serilog is actually
-        /// used. So, this class simulates that. it will replace any text in {curly braces} with an index number.
-        ///
+        /// For example: Log("Log message to {user}", user). This only works with serilog, but as the user of LibLog, you don't know if serilog is actually 
+        /// used. So, this class simulates that. it will replace any text in {curly braces} with an index number. 
+        /// 
         /// "Log {message} to {user}" would turn into => "Log {0} to {1}". Then the format parameters are handled using regular .net string.Format.
         /// </summary>
         /// <param name="messageBuilder">The message builder.</param>
@@ -2300,10 +2154,6 @@ namespace Baak.Logging.LogProviders
         }
     }
 
-#if !LIBLOG_PORTABLE
-
-    [ExcludeFromCodeCoverage]
-#endif
     internal static class TypeExtensions
     {
         internal static ConstructorInfo GetConstructorPortable(this Type type, params Type[] types)
@@ -2377,12 +2227,10 @@ namespace Baak.Logging.LogProviders
 #endif
 
 #if !LIBLOG_PORTABLE
-
         internal static object CreateDelegate(this MethodInfo methodInfo, Type delegateType)
         {
             return Delegate.CreateDelegate(delegateType, methodInfo);
         }
-
 #endif
 
         internal static Assembly GetAssemblyPortable(this Type type)
@@ -2395,10 +2243,6 @@ namespace Baak.Logging.LogProviders
         }
     }
 
-#if !LIBLOG_PORTABLE
-
-    [ExcludeFromCodeCoverage]
-#endif
     internal class DisposableAction : IDisposable
     {
         private readonly Action _onDispose;
@@ -2410,7 +2254,7 @@ namespace Baak.Logging.LogProviders
 
         public void Dispose()
         {
-            if (_onDispose != null)
+            if(_onDispose != null)
             {
                 _onDispose();
             }

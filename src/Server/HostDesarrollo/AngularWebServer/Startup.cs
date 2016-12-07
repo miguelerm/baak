@@ -1,4 +1,4 @@
-﻿using Baak.Logging;
+﻿using Baak.Hosts.Desarrollo.Logging;
 using Microsoft.Owin;
 using Microsoft.Owin.FileSystems;
 using Microsoft.Owin.StaticFiles;
@@ -19,8 +19,8 @@ namespace Baak.Hosts.Desarrollo.AngularWebServer
             var executionDir = Path.GetDirectoryName(executionPath);
             var contentPath = Path.GetFullPath(Path.Combine(executionDir, hostRelativeContentPath));
 
-            log.InfoFormat("Host dir: {executionDir}", executionDir);
-            log.InfoFormat("Content path: {contentPath}", contentPath);
+            log.InfoFormat("Host dir: {ExecutionDir}", executionDir);
+            log.InfoFormat("Content path: {ContentPath}", contentPath);
 
             app.UseFileServer(new FileServerOptions
             {

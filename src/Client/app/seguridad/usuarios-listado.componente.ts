@@ -21,7 +21,7 @@ export class UsuariosListadoComponente implements OnInit {
 
     ngOnInit() {
         this.svc.obtenerUsuarios().then(usuarios => {
-            this.usuarios = usuarios.items;
+            this.usuarios = usuarios.elementos;
         });
     }
 }
