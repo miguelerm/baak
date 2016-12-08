@@ -34,11 +34,15 @@
         main: './main.js',
         defaultExtension: 'js'
       },
-      'app/autenticacion': {
+      'app/core': {
         main: './index.js',
         defaultExtension: 'js'
       },
-      'app/core': {
+      'app/layout': {
+        main: './index.js',
+        defaultExtension: 'js'
+      },
+      'app/autenticacion': {
         main: './index.js',
         defaultExtension: 'js'
       },

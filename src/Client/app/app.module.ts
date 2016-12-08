@@ -2,22 +2,25 @@ import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes }   from '@angular/router';
 
+import { ConfigurationManager } from './configuration.manager'
+
 import { AppComponent }  from './app.component';
 import { PageNotFoundComponente } from './page-not-found.componente'
 
 import { CoreModulo } from './core';
 import { HomeModulo } from './home';
 import { SeguridadModulo } from './seguridad';
-import { ConfigurationManager } from './configuration.manager'
+import { LayoutModule } from './layout';
 
 const appRoutes: Routes = [
   { path: '**', component: PageNotFoundComponente }
 ];
 
 @NgModule({
-  imports:      [
+  imports: [
     BrowserModule,
     CoreModulo,
+    LayoutModule,
     HomeModulo,
     SeguridadModulo,
     RouterModule.forRoot(appRoutes),

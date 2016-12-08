@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    template: `
-        <h2>Home</h2>
-    `
+    templateUrl: 'app/home/home.template.html'
 })
 export class HomeComponente implements OnInit {
 
     ngOnInit() {
-        
+
     }
 }
