@@ -1,0 +1,54 @@
+# ----
+# Site
+
+title: Baak
+url: "https://miguelerm.github.io/baak"
+baseurl:
+google_analytics_key:
+show_full_navigation: true
+layouts_dir: ./_docs/_layouts
+repository: miguelerm/baak
+
+
+# Values for the jekyll-seo-tag gem (https://github.com/jekyll/jekyll-seo-tag)
+logo: /siteicon.png
+description: Proyecto de ejemplo de una aplicación distribuída
+author:
+  name: Miguel Román
+  email: miguelerm@gmail.com
+  twitter: miguelerm
+social:
+  name: Baak
+  links:
+    - https://miguelerm.github.io
+
+# -----
+# Build
+
+permalink: pretty
+
+gems:
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-feed
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - src/
+  - tools/
+  - bin/
+
+collections:
+  docs:
+    title: Documentación
+    permalink: /docs/:path/
+    output: true
+
+defaults:
+  -
+    scope:
+      path: ""
+      type: "docs"
+    values:
+      layout: default

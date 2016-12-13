@@ -255,3 +255,6 @@ src/Client/**/*.js.map
 src/Client/_test-output
 src/Client/_temp
 src/Client/styles/*.css
+
+Gemfile.lock
+_site/

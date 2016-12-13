@@ -1,4 +1,9 @@
-# Baak
+---
+title: Acerca del proyecto
+category: Inicio
+---
+
+#### Baak
 
 **Baak** es un proyecto que utilizo como base para muchos de los desarrollos
 a los que doy inicio desde cero, la idea principal es que sirva de ejemplo para
@@ -11,11 +16,9 @@ misma definición de este último).
 
 > **baak**: significa *hueso*, en maya yucateco.
 
-Para mas información [ver la documentación](https://miguelerm.github.io/baak).
-
 [Angular2]: https://angular.io/
-[TypeScript]: http://www.typescriptlang.org/
 [WebApi]: https://www.asp.net/web-api
 [CSharp]: https://msdn.microsoft.com/en-us/library/kx37x362.aspx
+[TypeScript]: http://www.typescriptlang.org/
 [Microservicios]: http://www.martinfowler.com/articles/microservices.html
 [SOA]: http://www.martinfowler.com/articles/microservices.html
