@@ -1,4 +1,4 @@
-﻿# Baak
+# Baak
 
 **Baak** es un proyecto que utilizo como base para muchos de los desarrollos
 a los que doy inicio desde cero, la idea principal es que sirva de ejemplo para
