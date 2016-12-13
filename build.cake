@@ -92,6 +92,14 @@ Task("Run-Client-Unit-Tests")
         Npm.FromPath("./src/Client").RunScript("test-once");
     });
 
+Task("Run")
+    .IsDependentOn("Copy-Server-Artifacts")
+    .Does(() => {
+        var processDir = buildDir + File("Baak.Hosts.Desarrollo.exe");
+        var settings = new ProcessSettings { Arguments = "--serve-angular-app" }; 
+        StartProcess(processDir, settings);
+    });
+
 //////////////////////////////////////////////////////////////////////
 // TASK TARGETS
 //////////////////////////////////////////////////////////////////////
