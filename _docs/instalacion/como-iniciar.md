@@ -69,7 +69,7 @@ Por lo tanto en este punto si ingresamos desde nuestro navegador a la dirección
 http://localhost:40000 nos solicitará un usuario y una contraseña (por defecto
 son usuario: **admin** password: **admin**) y nos mostrará la UI.
 
-![UI](/docs/images/ui.png)
+![UI]({{ site.baseurl }}/docs/images/ui.png)
 
 
 [Angular2]: https://angular.io/
