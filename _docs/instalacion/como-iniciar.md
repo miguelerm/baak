@@ -45,11 +45,31 @@ repositorio):
 ```
 
 Esto compilará la solución de Visual Studio y también el proyecto de Angular 2
-colocando todos los ejecutables en la carpeta `bin`.
+colocando todos los ejecutables en la carpeta `bin` en la raíz del repositorio.
 
 #### Ejecutar
 
-> **TODO:** colocar instrucciones para arrancar todos los componentes del sistema.
+Para iniciar el proyecto despues de haberlo compilado ejecutar desde PowerShell
+el script `build.ps1` especificando como target `Run` de la siguiente forma:
+
+```sh
+.\build.ps1 -Target Run
+```
+
+Esto iniciará los siguientes servicios (dejerá la consola a espera de presionar
+`Ctrl+C` para detener los servicios):
+
+| Servicio      | Url                    |
+|---------------|------------------------|
+| Autenticación | http://localhost:50001 |
+| Seguridad     | http://localhost:50002 |
+| UI            | http://localhost:40000 |
+
+Por lo tanto en este punto si ingresamos desde nuestro navegador a la dirección
+http://localhost:40000 nos solicitará un usuario y una contraseña (por defecto
+son usuario: **admin** password: **admin**) y nos mostrará la UI.
+
+![UI](/docs/images/ui.png)
 
 
 [Angular2]: https://angular.io/
