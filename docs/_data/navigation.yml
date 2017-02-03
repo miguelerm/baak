@@ -1,0 +1,17 @@
+# main links
+main:
+  # - title: "Documentación"
+  #  url: /docs/guia-de-inicio-rapido/
+  # - title: "About"
+  #   url: https://mmistakes.github.io/minimal-mistakes/about/
+  # - title: "Sample Posts"
+  #   url: /year-archive/
+  # - title: "Sample Collections"
+  #   url: /collection-archive/
+  # - title: "Sitemap"
+  #   url: /sitemap/
+docs:
+  - title: "Acerca del proyecto"
+    url: /docs/acerca-del-proyecto/
+  - title: "Inicio rápido"
+    url: /docs/guia-de-inicio-rapido/
