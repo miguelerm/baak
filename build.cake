@@ -74,7 +74,11 @@ Task("Copy-Server-Artifacts")
 Task("Restore-Npm-Packages")
     .Does(() => {
 
-        Npm.FromPath("./src/Client").Install();
+        var settings = new NpmInstallSettings{
+            WorkingDirectory = "./src/Client"
+        };
+
+        NpmInstall(settings);
 
     });
 
@@ -82,14 +86,25 @@ Task("Build-Client")
     .IsDependentOn("Restore-Npm-Packages")
     .Does(() => {
 
-        Npm.FromPath("./src/Client").RunScript("build");
+        var settings = new NpmRunScriptSettings {
+            ScriptName = "build",
+            WorkingDirectory = "./src/Client"
+        };
+
+        NpmRunScript(settings);
 
     });
 
 Task("Run-Client-Unit-Tests")
     .IsDependentOn("Build-Client")
     .Does(() => {
-        Npm.FromPath("./src/Client").RunScript("test-once");
+
+        var settings = new NpmRunScriptSettings {
+            ScriptName = "test-once",
+            WorkingDirectory = "./src/Client"
+        };
+
+        NpmRunScript(settings);
     });
 
 Task("Run")
